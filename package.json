@@ -3,5 +3,14 @@
   "version": "0.1.0",
   "engines": {
     "node": ">=14.x"
+  },
+  "description": "Reads and parses markdown files. To verify the links they contain and report some features.",
+  "author": "Francisca Valdés <fran_valdes_m@live.com> (https://github.com/FranciscaValdes)",
+  "license": "",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "colors": "^1.4.0"
   }
 }
