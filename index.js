@@ -1,68 +1,98 @@
 const path = require('path');
 const fs = require('fs');
-const {readFile} = require('fs/promises');
+const { readFile } = require('fs/promises');
 const colors = require('colors/safe');
 const { exit } = require('process');
 const { resolve } = require('path');
 const { error } = require('console');
-const markdownIt= require('markdown-it')();
+const markdownIt = require('markdown-it')();
 const jsdom = require('jsdom');
 const { get } = require('https');
 const { JSDOM } = jsdom;
-// // const readline = require('readline');
-// // const prompts = readline.createInterface(process.stdin, process.stdout);
-//  const stdin = process.openStdin(); //función openStdin() para aceptar entradas por teclado
+const functions = require('./functions.js');
+const nodeType = require('jsdom/lib/jsdom/living/node-type');
+const { rejects } = require('assert');
+const status = functions.status;
+
+
 const stdout = process.stdout;
-let receivedRoute= process.argv[2].toString().trim()
-let obtainedLinks = [];
-let infoLinks = {};
+//recibiendo la ruta
+let receivedRoute = process.argv[2].toString().trim()
 
 
-// const receivedRouteS = receivedRoute.toString().trim()
-receivedRoute = path.resolve(receivedRoute); //ruta absoluta
-receivedRoute= path.normalize(receivedRoute); //normaliza la ruta
-console.log(receivedRoute);
+
+//pasandola la ruta a absoluta
+receivedRoute = path.resolve(receivedRoute);
+// normalizando la ruta
+receivedRoute = path.normalize(receivedRoute);
+
 // stdout.write(colors.cyan('Ingrese la ruta a su archivo:'));
 
-
-if(!fs.existsSync(receivedRoute)){
+//no existe la ruta? => error
+//existe? => sigue adelante
+if (!fs.existsSync(receivedRoute)) {
     throw new Error('Ruta no existe');
 }
-if(path.extname(receivedRoute) !== '.md'){
-throw new Error('Archivo no contiene formato md');
+if (path.extname(receivedRoute) !== '.md') {
+    throw new Error('Archivo no contiene formato md');
 }
 
-readFile(receivedRoute, 'utf-8')
-.then((readingFile) => {
-return readingFile;
-})
-.then((readingfileString) => {
-    const convertHtml = markdownIt.render(readingfileString); //convierte md a html
-                       const domContent = new JSDOM(convertHtml);
-                       const linksCrudos = Array.from(domContent.window.document.querySelectorAll('a'));
-                       const links = linksCrudos.map((linkCrudo)=>{
-                       return linkCrudo.href
-                       })
-                    
-                     return linksCrudos;
-                       
-})
- .then ( (linksCrudos) => {
-     obtainedLinks = [];
-    linksCrudos.forEach((link) => {
-                            if (link.href.includes("http", "https")){              
-                              infoLinks = {
-                                   href: link.href,
-                                   text: link.text,
-                                   file: receivedRoute,
-                               }
-                            obtainedLinks.push(infoLinks);
-                             }
-                       });
-                       console.log(obtainedLinks);
-                       console.log(obtainedLinks.length);
-                       return obtainedLinks;
-})
+ const reading = (receivedRoute) => {
+     return new promise((resolve, rejects) => {
+         if()
+       resolve(readFile(receivedRoute, 'utf-8'))
+     })
+    
+    .then((readingFile) => {
+        return readingFile;
+    }) }
+    console.log(reading(receivedRoute));
+    // .then((readingfileString) => {
+    //     const convertHtml = markdownIt.render(readingfileString); //convierte md a html
+    //     const domContent = new JSDOM(convertHtml); //biblioteca que analiza e interactúa con html ensamblado como un navegador
+    //     const linksCrudos = Array.from(domContent.window.document.querySelectorAll('a')); //array de elementos 'a'
+    //     const links = linksCrudos.map((linkCrudo) => {
+    //         return linkCrudo.href
+    //     })
+    //     // console.log(linksCrudos);
+    //     return linksCrudos;
 
- 
+
+    // })
+    // .then((linksCrudos) => {
+    //     let obtainedLinks = [];
+    //     linksCrudos.forEach((link) => {
+    //         if (link.href.includes("http", "https")) {
+    //             infoLinks = {
+    //                 href: link.href,
+    //                 text: link.text,
+    //                 file: receivedRoute,
+    //             }
+    //             obtainedLinks.push(infoLinks);
+    //         }
+    //     });
+    //     // console.log(obtainedLinks);
+    //     console.log(obtainedLinks.length);
+
+    //     return obtainedLinks;
+    // })
+    // .then((obtainedLinks) => {
+    //     let linkStatus = [];
+    //     obtainedLinks.map((link) => {
+    //         let url = link.href;
+    //         status(url).then((res => {
+    //             url.status = res;
+    //             //  console.log(hrefLinks);
+    //             linkStatus.push(hrefLinks);
+    //         })).catch(res => {
+    //             res
+    //         })
+
+    //     }); //return linkStatus;
+    // })
+    // .then((linkStatus) => {
+    //     console.log(linkStatus)
+    // })
+
+
 
