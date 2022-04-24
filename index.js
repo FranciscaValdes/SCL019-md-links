@@ -12,53 +12,101 @@ const { JSDOM } = jsdom;
 const functions = require('./functions.js');
 const nodeType = require('jsdom/lib/jsdom/living/node-type');
 const { rejects } = require('assert');
+const { options } = require('markdown-it/lib/presets/default');
 const status = functions.status;
-
+const { existRoute, questionAbsoluteRoute, absoluteRoute, normalizeRoute, questionMdExtension, linkStatus } = require('../functiontest.js')
 
 const stdout = process.stdout;
 //recibiendo la ruta
-let receivedRoute = process.argv[2].toString().trim()
+let receivedRoute = process.argv[2].toString().trim();
+const validate = process.argv[3];
+const stats = process.argv[4];
 
 
 
 //pasandola la ruta a absoluta
 receivedRoute = path.resolve(receivedRoute);
-// normalizando la ruta
-receivedRoute = path.normalize(receivedRoute);
+
 
 // stdout.write(colors.cyan('Ingrese la ruta a su archivo:'));
 
 //no existe la ruta? => error
 //existe? => sigue adelante
-if (!fs.existsSync(receivedRoute)) {
-    throw new Error('Ruta no existe');
-}
-if (path.extname(receivedRoute) !== '.md') {
-    throw new Error('Archivo no contiene formato md');
-}
-
- const reading = (receivedRoute) => {
-     return new promise((resolve, rejects) => {
-         if()
-       resolve(readFile(receivedRoute, 'utf-8'))
-     })
-    
-    .then((readingFile) => {
-        return readingFile;
-    }) }
-    console.log(reading(receivedRoute));
-    // .then((readingfileString) => {
-    //     const convertHtml = markdownIt.render(readingfileString); //convierte md a html
-    //     const domContent = new JSDOM(convertHtml); //biblioteca que analiza e interactúa con html ensamblado como un navegador
-    //     const linksCrudos = Array.from(domContent.window.document.querySelectorAll('a')); //array de elementos 'a'
-    //     const links = linksCrudos.map((linkCrudo) => {
-    //         return linkCrudo.href
-    //     })
-    //     // console.log(linksCrudos);
-    //     return linksCrudos;
 
 
-    // })
+// const mdLinks = (enteredPath, options) => {
+//     return new promise((resolve, rejects) => {
+//         if (!existRoute(enteredPath)) {
+//             throw new Error('Ruta no existe');
+//         } else {
+//             questionAbsoluteRoute(enteredPath) ? enteredPath : absoluteRoute(enteredPath);
+//             normalizeRoute(enteredPath);
+//         };
+//         if (questionMdExtension(enteredPath) !== '.md') {
+//             throw new Error('Archivo no contiene formato md');
+//         }
+//         resolve(readFile(enteredPath, 'utf-8'));
+//         rejects(stdout('Archivo no se puede leer'));
+        
+
+
+//     })
+// }
+
+
+
+
+
+
+
+
+
+
+// }
+
+// const readingFileEnteredPath = (enteredPath) => {
+//     return new promise((resolve, rejects) => {
+//         if (!existRoute(enteredPath)) {
+//             throw new Error('Ruta no existe');
+//         } else {
+//             questionAbsoluteRoute(enteredPath) ? enteredPath : absoluteRoute(enteredPath);
+//             normalizeRoute(enteredPath);
+//         };
+//         if (questionMdExtension(enteredPath) !== '.md') {
+//             throw new Error('Archivo no contiene formato md');
+//         }
+//         resolve(readFile(enteredPath, 'utf-8'));
+//         rejects(stdout('Archivo no se puede leer'));
+//     })
+
+//         .then((readingFile) => {
+//             return readingFile;
+//         })
+// }
+console.log(readFile(receivedRoute, 'utf-8'));
+// .then((readingfileString) => {
+//     const convertHtml = markdownIt.render(readingfileString); //convierte md a html
+//     const domContent = new JSDOM(convertHtml); //biblioteca que analiza e interactúa con html ensamblado como un navegador
+//     const linksCrudos = Array.from(domContent.window.document.querySelectorAll('a')); //array de elementos 'a'
+//     const links = linksCrudos.map((linkCrudo) => {
+//         return linkCrudo.href
+//     })
+//     // console.log(linksCrudos);
+//     return linksCrudos;
+
+
+// const readingDataFile = (dataFile) => {
+//     const convertHtml = markdownIt.render(dataFile); //convierte md a html
+//     const domContent = new JSDOM(convertHtml); //biblioteca que analiza e interactúa con html ensamblado como un navegador
+//     const linksCrudos = Array.from(domContent.window.document.querySelectorAll('a')); //array de elementos 'a'
+//     const links = linksCrudos.map((linkCrudo) => {
+//         return linkCrudo.href
+//     })
+//     //     // console.log(linksCrudos);
+//     return linksCrudos;
+// }
+
+
     // .then((linksCrudos) => {
     //     let obtainedLinks = [];
     //     linksCrudos.forEach((link) => {

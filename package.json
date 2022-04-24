@@ -22,8 +22,9 @@
     "test": "test"
   },
   "scripts": {
-      "test": "jest --coverage --verbose"
-  },
+      "test": "jest --coverage --verbose",
+      "start":  "index.js"
+      },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FranciscaValdes/SCL019-md-links.git"

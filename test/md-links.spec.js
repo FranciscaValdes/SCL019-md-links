@@ -76,12 +76,14 @@ describe('Función questionMdExtension comprueba si la ruta entregada contine ar
 )
 
 //testea función linkStatus
-describe('Función linkStatus ', () => {
+describe('Función linkStatus retorna el status de una url entregada ', () => {
   it('is a Function', () => {
-    expect(typeof questionMdExtension).toBe('function');
+    expect(typeof linkStatus).toBe('function');
   })
-  it ('Debería retornar true si la ruta contiene archivo extensión .md', () => {
-    expect(questionMdExtension(absolutePath)).toBe(true);
+  it ('Debería retornar el status de la url', () => {
+    let url = 'https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Using_promises';
+    let statusLink = linkStatus(url)
+    expect(statusLink).toBe(true);
   })
   it ('Debería retornar false si la ruta no contiene archivo con extensión .md', () => {
     expect(questionMdExtension(pathPng)).toBe(false);
