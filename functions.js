@@ -1,35 +1,20 @@
-const fs = require('fs');
-const path = require('path');
-
 const { readFile } = require('fs/promises');
 const urlStatusCode = require('url-status-code');
+const markdownIt = require('markdown-it')();
+const jsdom = require('jsdom');
+const { JSDOM } = jsdom;
+const fetch = require('node-fetch');
 
-let route = process.argv[2].toString().trim()
 
 
 
 
-// const readingMdFile = (route) => readFile(route, 'utf-8');  // lee el archivo
-// console.log(readingMdFile(route));
 
-const url = 'https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Using_promises';
+const readingMdFile = (route) => readFile(route, 'utf-8');  // lee el archivo
 
-const urlc = (url) => {
-  urlStatusCode(url, (error, statusCode) => {
-    if (error) {
-      console.error(error)
-    } else {
-      console.log(statusCode)
-    }
-  })
-}
 
-// console.log(urlc)
-
-// console.log(urlStatusCode('https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Using_promises'));
-
-//función que obtiene array con objeto de información de links
-const getlinks = (mdFile, route) => {
+//función que obtiene array con objeto que contiene información de links
+const getLinks = (mdFile, route) => {
   const convertHtml = markdownIt.render(mdFile); //convierte md a html
   const domContent = new JSDOM(convertHtml); //biblioteca que analiza e interactúa con html ensamblado como un navegador
   const links = Array.from(domContent.window.document.querySelectorAll('a')); //array de elementos 'a'
@@ -47,28 +32,38 @@ const getlinks = (mdFile, route) => {
       obtainedLinks.push(infoLinks);
     }
   })
+  console.log(obtainedLinks);
   return obtainedLinks;
 }
 
 
-//función que muestra en consola links únicos
-const uniqueLinks = (links) => {
-
-  const unique = [];
-  links.map((link) => {
-    unique.push(link.href)
-  })
-  const mySet = new Set(unique);
-  console.log('Unique: ', mySet.size);
+const statusLinks = links => {
+  const objectDetailsLinks = links.map(link => {
+    return fetch(link)
+      .then((response) => {
+        return {
+          file: link.file,
+          text: link.text,
+          href: link.href,
+          status: response.status,
+          ok: 'ok',
+        }
+      })
+      .catch((error) => {
+        return {
+          file: link.file,
+          text: link.text,
+          href: link.href,
+          status: error.status === undefined ? 'El estado del status es indefinido' : error.status,
+          ok: 'fail',
+        }
+      })
+  });
+  return Promise.all(objectDetailsLinks)
 }
 
 
-
-
 module.exports = {
-  // readingMdFile,
-  getlinks,
-  // linkStatus,
-  uniqueLinks,
-
+  getLinks,
+  statusLinks
 }

@@ -14,31 +14,31 @@ const normalizeRoute = (route) => path.normalize(route); // normalizando la ruta
 
 const questionMdExtension = (route) => path.extname(route) === '.md'; //true si extensión es md
 
+
 //función que obtiene status de links
 let url = 'https://www.npmjs.com';
 const linkStatus = (url) => {
   // return new Promise((resolve, rejects) => {
-    fetchUrl(url, (error, meta) => {
-      if (meta) {
-        // resolve(meta.status);
-       console.log( meta.status)
-      } else {
-        // rejects(error)
-        console.log(error)
-      }
-    })
+  fetchUrl(url, (error, meta) => {
+    if (meta) {
+      // resolve(meta.status);
+      console.log(meta.status)
+    } else {
+      // rejects(error)
+      console.log(error)
+    }
+  })
   // })
 }
 
 
-console.log(linkStatus(url))
+// console.log(linkStatus(url))
 
-  module.exports = {
-    existRoute,
-    questionAbsoluteRoute,
-    absoluteRoute,
-    normalizeRoute,
-    questionMdExtension,
-    
-  }
-  
+module.exports = {
+  existRoute,
+  questionAbsoluteRoute,
+  absoluteRoute,
+  normalizeRoute,
+  questionMdExtension,
+
+}
