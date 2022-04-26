@@ -7,53 +7,55 @@ const { existRoute,
     absoluteRoute,
     normalizeRoute,
     questionMdExtension } = require('./functiontest.js');
+const fetch = require('node-fetch');
 
 
+//función inicial que retorna una promesa que lee la data del archivo
 const readingFileEnteredPath = (enteredPath) => {
+    if (!existRoute(enteredPath)) {
+        throw new Error(colors.red('Ruta no existe, asegúrese de haber ingresado la ruta correcta'));
+    };
+
+    if (!questionAbsoluteRoute(enteredPath)) {
+        absoluteRoute(enteredPath);
+        normalizeRoute(enteredPath);
+    };
+
+    if (questionMdExtension(enteredPath) === false) {
+        throw new Error(colors.red('Archivo no contiene formato md, verifique el formato de su archivo'));
+    };
+
     return new Promise((resolve, reject) => {
-        if (!existRoute(enteredPath)) {
-            throw new Error(colors.red('Ruta no existe, asegúrese de haber ingresado la ruta correcta'));
-        };
-
-        if (!questionAbsoluteRoute(enteredPath)) {
-            absoluteRoute(enteredPath);
-            normalizeRoute(enteredPath);
-        };
-
-        if (questionMdExtension(enteredPath) === false) {
-            throw new Error(colors.red('Archivo no contiene formato md, verifique el formato de su archivo'));
-        };
-
-       
         resolve(readFile(enteredPath, 'utf-8'))
-        
         reject('No fue posible leer el archivo')
 
     })
 };
 
 
-
+//función que retorna una promesa que se resuelve leyendo links contenidos en el archivo
 const readingFile = (enteredPath) => {
     return new Promise((resolve, reject) => {
         readingFileEnteredPath(enteredPath)
             .then((dataFile) => {
                 let arrayLinks = getLinks(dataFile, enteredPath);
-                resolve(arrayLinks)
-                //  return arrayLinks
-            });
+                resolve(arrayLinks);
+                reject('Error:No se pudo acceder a los links');
 
-
+            })
     }
     )
 }
+// readingFile(enteredPath)
 
+//función que obtiene status de links
 const status = (enteredPath) => {
     readingFileEnteredPath(enteredPath)
         .then((readingFile) => {
             let arrayLinks = getLinks(readingFile, enteredPath);
-            console.log(arrayLinks.length);
+            // console.log(arrayLinks.length);
             let status = statusLinks(arrayLinks);
+
             return status;
         })
         .then((status) => {
@@ -62,67 +64,68 @@ const status = (enteredPath) => {
         })
 }
 
-status(enteredPath);
+// status(enteredPath);
 
 
+//función que obtiene el total de links
 const totalLinks = (enteredPath) => {
     readingFile(enteredPath)
         .then(res => {
-            console.log('TOTAL:', res.length)
+            console.log(colors.green('Total:', res.length))
         })
         .catch(err => {
             console.log(err)
         })
 }
 
-//totalLinks(enteredPath)
+// totalLinks(enteredPath)
 
-// Funcion que obtiene los links Unicos
+// Funcion que obtiene los links Unicos                          
 const uniqueLinks = (enteredPath) => {
-    const unique = [];
+    const links = [];
     readingFile(enteredPath)
         .then(res => {
             res.map((link) => {
-                unique.push(link.href)
+                links.push(link.href)
             })
-            const mySet = new Set(unique);
-            console.log("Unique:", mySet.size)
+            const unique = new Set(links);
+            console.log(colors.green("Unique:" + unique.size))
         })
         .catch(err => {
             console.log(err)
         })
 }
-//uniqueLinks
+// uniqueLinks(enteredPath)
 
-const totalAndBrokenLinks = (enteredPath) => {
+//función que muestra links rotos
+const brokenLinks = (enteredPath) => {
+
     readingFile(enteredPath)
         .then(res => {
-            const broken = [];
-            res.forEach((link) => {
-                broken.push(statusLinks(link.href));
-            })
-            Promise.all(broken)
-                .then(response => {
-                    const result = response.filter(status => {
-                        if (status >= 400) {
-                            return status;
-                        }
+            res.map(link =>
+                fetch(link)
+                    .then(res => {
+                        return res.status
                     })
-                    console.log('Total:', res.length)
-                    console.log('Broken:', result.length)
-                })
-        })
-        .catch(err => {
-            console.log(err)
+                    .then(res => {
+                        if (res >= 399) {
+                            let broken = [];
+                            broken.push(res);
+                            console.log(colors.red('Broken: ' + broken.length))
+                        }
+
+                    })
+
+            )
         })
 }
-
-
-totalAndBrokenLinks(enteredPath)
+// brokenLinks(enteredPath)
 
 module.exports = {
+
     readingFile,
     status,
     totalLinks,
-    uniqueLinks
+    uniqueLinks,
+    brokenLinks
 }

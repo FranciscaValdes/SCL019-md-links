@@ -1,14 +1,3 @@
-// const mdLinks = require('../');
-
-
-// describe('mdLinks', () => {
-
-//   it('should...', () => {
-//     console.log('FIX ME!');
-//   });
-
-// });readingMdFile,getlinks 
-//funciones para testear
 const { existRoute, questionAbsoluteRoute,absoluteRoute, questionMdExtension, linkStatus} = require('../functiontest.js')
 
 //Data para utilizar en test
@@ -90,17 +79,4 @@ describe('Función linkStatus retorna el status de una url entregada ', () => {
   })
 }
 )
-// //testea función readingMdFile
-// describe('Función readingMdFile ', () => {
-//   it('is a Promise', () => {
-//     expect(typeof readingMdFile).toBe('promise');
-//   })
-//   it ('Debería retornar el contenido del archivo que está leyendo', () => {
 
-//     expect(readingMdFile(absolutePath)).toBe();
-//   })
-//   it ('Debería retornar false si la ruta no contiene archivo con extensión .md', () => {
-//     expect(questionMdExtension(pathPng)).toBe(false);
-//   })
-// }
-// )

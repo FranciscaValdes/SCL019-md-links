@@ -1,16 +1,8 @@
-const { readFile } = require('fs/promises');
-const urlStatusCode = require('url-status-code');
 const markdownIt = require('markdown-it')();
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 const fetch = require('node-fetch');
-
-
-
-
-
-
-const readingMdFile = (route) => readFile(route, 'utf-8');  // lee el archivo
+const route = process.argv[2].toString().trim();
 
 
 //función que obtiene array con objeto que contiene información de links
@@ -18,9 +10,6 @@ const getLinks = (mdFile, route) => {
   const convertHtml = markdownIt.render(mdFile); //convierte md a html
   const domContent = new JSDOM(convertHtml); //biblioteca que analiza e interactúa con html ensamblado como un navegador
   const links = Array.from(domContent.window.document.querySelectorAll('a')); //array de elementos 'a'
-  // const links = rawLinks.map((linkCrudo) => {
-  //     return linkCrudo.href
-  // })
   let obtainedLinks = [];
   links.forEach((link) => {
     if (link.href.includes("http", "https")) {
@@ -32,11 +21,12 @@ const getLinks = (mdFile, route) => {
       obtainedLinks.push(infoLinks);
     }
   })
-  console.log(obtainedLinks);
+  // console.log(obtainedLinks);
   return obtainedLinks;
 }
 
 
+//función que retorna status de links
 const statusLinks = links => {
   const objectDetailsLinks = links.map(link => {
     return fetch(link)
@@ -65,5 +55,5 @@ const statusLinks = links => {
 
 module.exports = {
   getLinks,
-  statusLinks
+  statusLinks,
 }

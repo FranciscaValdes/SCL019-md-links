@@ -1,34 +1,46 @@
-const { readingFile, status, totalLinks, uniqueLinks } = require('./promises.js');
+
+const { readingFile, status, totalLinks, uniqueLinks, brokenLinks } = require('./promises.js');
 const enteredPath = process.argv[2].toString().trim();
-options = process.argv[3] , process.argv[4];
+let validate = process.argv[3] + process.argv[4];
+
 
 const mdLinks = (enteredPath, options) => {
-    return new Promise((resolve, reject) => {
 
+    if (enteredPath) {
         switch (options) {
             case undefined:
-                resolve(readingFile(enteredPath));
+                readingFile(enteredPath)
+                    .then((res) => {
+                        console.log(res)
+                    })
                 break;
 
-            case --validate:
-                resolve(status(enteredPath));
+            case '--validate':
+
+                status(enteredPath);
                 break;
 
-            case --stats:
-                resolve(totalLinks(enteredPath), uniqueLinks(enteredPath));
+            case '--stats':
+                totalLinks(enteredPath);
+                uniqueLinks(enteredPath)
+                    ;
                 break;
 
-            case --validate, --stats:
-                resolve();
+            case '--validate--stats':
+                totalLinks(enteredPath);
+                uniqueLinks(enteredPath);
+                brokenLinks(enteredPath);
+
                 break;
         }
 
 
-        reject('No se pudo leer el archivo')
-    })
+
+    }
 }
 
-module.exports= {
+// mdLinks(enteredPath, validate);
+module.exports = {
     mdLinks
 }
 

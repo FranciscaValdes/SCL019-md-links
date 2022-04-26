@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const fetchUrl = require("fetch").fetchUrl;
+
 
 const existRoute = (route) => fs.existsSync(route); //ruta existe?
 
@@ -15,21 +15,6 @@ const normalizeRoute = (route) => path.normalize(route); // normalizando la ruta
 const questionMdExtension = (route) => path.extname(route) === '.md'; //true si extensión es md
 
 
-//función que obtiene status de links
-let url = 'https://www.npmjs.com';
-const linkStatus = (url) => {
-  // return new Promise((resolve, rejects) => {
-  fetchUrl(url, (error, meta) => {
-    if (meta) {
-      // resolve(meta.status);
-      console.log(meta.status)
-    } else {
-      // rejects(error)
-      console.log(error)
-    }
-  })
-  // })
-}
 
 
 // console.log(linkStatus(url))
