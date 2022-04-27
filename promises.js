@@ -46,7 +46,7 @@ const readingFile = (enteredPath) => {
     }
     )
 }
-// readingFile(enteredPath)
+//  readingFile(enteredPath)
 
 //función que obtiene status de links
 const status = (enteredPath) => {
@@ -64,7 +64,7 @@ const status = (enteredPath) => {
         })
 }
 
-// status(enteredPath);
+//   status(enteredPath);
 
 
 //función que obtiene el total de links
@@ -78,7 +78,7 @@ const totalLinks = (enteredPath) => {
         })
 }
 
-// totalLinks(enteredPath)
+//  totalLinks(enteredPath)
 
 // Funcion que obtiene los links Unicos                          
 const uniqueLinks = (enteredPath) => {
@@ -95,7 +95,7 @@ const uniqueLinks = (enteredPath) => {
             console.log(err)
         })
 }
-// uniqueLinks(enteredPath)
+//  uniqueLinks(enteredPath)
 
 //función que muestra links rotos
 const brokenLinks = (enteredPath) => {
@@ -119,10 +119,9 @@ const brokenLinks = (enteredPath) => {
             )
         })
 }
-// brokenLinks(enteredPath)
+//  brokenLinks(enteredPath)
 
 module.exports = {
-
     readingFile,
     status,
     totalLinks,

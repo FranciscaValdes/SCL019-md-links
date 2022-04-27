@@ -1,7 +1,8 @@
-
+const { options } = require('markdown-it/lib/presets/default');
 const { readingFile, status, totalLinks, uniqueLinks, brokenLinks } = require('./promises.js');
 const enteredPath = process.argv[2].toString().trim();
-let validate = process.argv[3] + process.argv[4];
+let validate = process.argv[3];
+let validateStats = validate + process.argv[4];
 
 
 const mdLinks = (enteredPath, options) => {
@@ -16,8 +17,10 @@ const mdLinks = (enteredPath, options) => {
                 break;
 
             case '--validate':
-
                 status(enteredPath);
+                // .then((res) => {
+                //     console.log(res)
+                // })
                 break;
 
             case '--stats':
@@ -39,7 +42,7 @@ const mdLinks = (enteredPath, options) => {
     }
 }
 
-// mdLinks(enteredPath, validate);
+ mdLinks(enteredPath, validate);
 module.exports = {
     mdLinks
 }

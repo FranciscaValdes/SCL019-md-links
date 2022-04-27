@@ -1,4 +1,4 @@
-const { existRoute, questionAbsoluteRoute,absoluteRoute, questionMdExtension, linkStatus} = require('../functiontest.js')
+const { existRoute, questionAbsoluteRoute,absoluteRoute, questionMdExtension, normalizeRoute} = require('../functiontest.js')
 
 //Data para utilizar en test
 const path = './README.md';
@@ -64,19 +64,5 @@ describe('Función questionMdExtension comprueba si la ruta entregada contine ar
 }
 )
 
-//testea función linkStatus
-describe('Función linkStatus retorna el status de una url entregada ', () => {
-  it('is a Function', () => {
-    expect(typeof linkStatus).toBe('function');
-  })
-  it ('Debería retornar el status de la url', () => {
-    let url = 'https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Using_promises';
-    let statusLink = linkStatus(url)
-    expect(statusLink).toBe(true);
-  })
-  it ('Debería retornar false si la ruta no contiene archivo con extensión .md', () => {
-    expect(questionMdExtension(pathPng)).toBe(false);
-  })
-}
-)
+
 
