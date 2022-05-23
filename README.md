@@ -70,27 +70,34 @@ Por parte del programa
 
 ***Programa debe estar disponible para ser instalado a través de npm install
 (Configurar package.json, repo público)***
-1) pásame una ruta
-
-2)Ruta/ archivo: es válido? 
-
+* 1.- pásame una ruta
+* 2.-Ruta/ archivo: es válido? 
 Si: se continúa  / No: lanzar error: “Archivo/ Ruta no válidos”
-3) Ruta:  Absoluta  ||  Relativa
-4.- Buscar archivo md válido para leer / si no lo encuentra, lanzar error: “No se ha encontrado archivo formato .md, verificar formato”
-5.- Analizar archivo md y encontrar links.
-6.- Retornar una promesa que resuelva un arreglo de objetos:
+* 3) Ruta:  Absoluta  ||  Relativa
+* 4.- Buscar archivo md válido para leer / si no lo encuentra, lanzar error: “No se ha encontrado archivo formato .md, verificar formato”
+* 5.- Analizar archivo md y encontrar links.
+* 6.- Retornar una promesa que resuelva un arreglo de objetos:
 -Cada objeto representa un link y contiene las sgtes. Propiedades: 
-Con validate:false :
+* Con validate:false :
+
 •	href: URL encontrada.
+
 •	text: Texto que aparecía dentro del link (<a>).
+
 •	file: Ruta del archivo donde se encontró el link.
-Con validate:true :
+
+* Con validate:true :
+
 •	href: URL encontrada.
+
 •	text: Texto que aparecía dentro del link (<a>).
+
 •	file: Ruta del archivo donde se encontró el link.
+
 •	status: Código de respuesta HTTP.
+
 •	ok: Mensaje fail en caso de fallo u ok en caso de éxito.
-. Imprimirlos en consola.
+* 7.- Imprimirlos en consola.
 
 
 ## 4. Desafíos personales enfrentados en el proyecto
