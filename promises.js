@@ -1,4 +1,3 @@
-const enteredPath = process.argv[2].toString().trim();
 const colors = require('colors/safe');
 const { readFile } = require('fs/promises');
 const { getLinks, statusLinks } = require('./functions.js');
@@ -71,7 +70,7 @@ const status = (enteredPath) => {
 const totalLinks = (enteredPath) => {
     readingFile(enteredPath)
         .then(res => {
-            console.log(colors.green('Total:', res.length))
+            console.log(colors.blue('Total:', res.length))
         })
         .catch(err => {
             console.log(err)
@@ -89,7 +88,7 @@ const uniqueLinks = (enteredPath) => {
                 links.push(link.href)
             })
             const unique = new Set(links);
-            console.log(colors.green("Unique:" + unique.size))
+            console.log(colors.cyan("Unique:" + unique.size))
         })
         .catch(err => {
             console.log(err)
@@ -128,3 +127,7 @@ module.exports = {
     uniqueLinks,
     brokenLinks
 }
+
+
+
+

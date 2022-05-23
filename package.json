@@ -1,12 +1,13 @@
 {
-  "name": "md-links",
+  "name": "fvm-md-links",
   "version": "0.1.0",
   "engines": {
     "node": ">=14.x"
   },
   "description": "Reads and parses markdown files. To verify the links they contain and report some features.",
   "author": "Francisca Valdés <fran_valdes_m@live.com> (https://github.com/FranciscaValdes)",
-  "main": "./index.js",
+  "main": "./cli.js",
+  "bin": "fvm-md-links/cli.js",
   "license": "ISC",
   "dependencies": {
     "colors": "^1.4.0",
@@ -15,15 +16,14 @@
     "jest": "^27.5.1",
     "jsdom": "^19.0.0",
     "markdown-it": "^12.3.2",
-    "node-fetch": "^2.6.7",
-    "url-status-code": "^2.0.0"
+    "node-fetch": "^2.6.7"
   },
   "directories": {
     "test": "test"
   },
   "scripts": {
     "test": "jest --coverage --verbose",
-    "start": "node index.js"
+    "dev": "node ./cli.js"
   },
   "repository": {
     "type": "git",
