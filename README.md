@@ -16,7 +16,7 @@ Los archivos `Markdown` normalmente contienen _links_ (vínculos/ligas) que
 muchas veces están rotos o ya no son válidos y eso perjudica mucho el valor de
 la información que se quiere compartir.
 
-Para solucionar esa problemática, fue creada mdlinks, la cual es una herramienta de Línea de comando(CLI), creada en Javascript usando [Node.js](https://nodejs.org/, que lee y analiza archivos en formato `Markdown`, con el fin de verificar los links que contiene el archivo y reportar algunas estadísticas.
+Para solucionar esa problemática, fue creada mdlinks, la cual es una herramienta de Línea de comando(CLI), creada en Javascript usando [Node.js](https://nodejs.org/), que lee y analiza archivos en formato `Markdown`, con el fin de verificar los links que contiene el archivo y reportar algunas estadísticas.
 
 ![md-links](https://user-images.githubusercontent.com/110297/42118443-b7a5f1f0-7bc8-11e8-96ad-9cc5593715a6.jpg)
 
@@ -31,13 +31,22 @@ Los comandos que ingreses dependerán de las verificaciones y estadísticas que 
    
    node cli.js 'tu ruta a tu archivo .md'
 
+   ![md-links](./img/primer-caso.jpeg)
+
 2.-Para averiguar si el link funciona o no:
 
    node cli.js 'tu ruta a tu archivo .md' --validate
 
+   ![md-links](./img/segundo-caso.jpeg)
+
+   Vemos que el _output_ en este caso incluye el status de la respuesta recibida a la petición HTTP a dicha URL, aspi como la palabra `ok` o `fail` después de la propiedad href, que será 'fail' en caso de que hubiera un error en el status recibido.
+
+
 3.-Para ver de forma simple el total de links y los links únicos:
 
    node cli.js 'tu ruta a tu archivo .md' --stats
+
+   ![md-links](./img/tercer-caso.jpeg)
 
 4.-Para conocer el total de links, links únicos y links rotos:
 
@@ -47,7 +56,7 @@ Los comandos que ingreses dependerán de las verificaciones y estadísticas que 
 
 
 
-## 3. Cómo se pensó mdlinks
+## 3. ¿Cómo se pensó mdlinks?
 
 Por parte del developer:
 
