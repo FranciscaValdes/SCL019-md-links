@@ -4,7 +4,7 @@
 
 * [1. ¿Qué es mdlinks?](#1-¿Qué-es-mdlinks?)
 * [2. ¿Cómo se utiliza?](#2-¿Cómo-se-utiliza?)
-* [3. Cómo se pensó mdlinks](#3-Cómo-se-pensó-mdlinks)
+* [3. ¿Cómo se pensó mdlinks?](#3-Cómo-se-pensó-mdlinks)
 * [4. Desafíos personales enfrentados en el proyecto](#4-Desafíos-personales-enfrentados-en-el-proyecto)
 
 
@@ -70,8 +70,8 @@ Por parte del programa
 
 ***Programa debe estar disponible para ser instalado a través de npm install
 (Configurar package.json, repo público)***
-1.- pásame una ruta
-2.- Ruta/ archivo: es válido? 
+1) pásame una ruta
+2)Ruta/ archivo: es válido? 
 Si: se continúa  / No: lanzar error: “Archivo/ Ruta no válidos”
 3.- Ruta:  Absoluta  ||  Relativa
 4.- Buscar archivo md válido para leer / si no lo encuentra, lanzar error: “No se ha encontrado archivo formato .md, verificar formato”
