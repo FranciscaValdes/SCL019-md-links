@@ -60,20 +60,22 @@ Los comandos que ingreses dependerán de las verificaciones y estadísticas que 
 
 Por parte del developer:
 
-1.-	Developer necesita encontrar links rotos, buenos y repertidos en su archivo md
-2.-	Instala npm install --global <github-FranciscaValdes>/md-links
-3.-	 Ejecutar (md-links <path-to-file> [options])
-4.-	$ md-links ./some/example.md Ejecuta el programa y entrega el archivo a revisar
-5.-	Se imprime en consola la ruta y los links encontrados.
+* 1.-	Developer necesita encontrar links rotos, buenos y repertidos en su archivo md
+* 2.-	Instala npm install --global <github-FranciscaValdes>/md-links
+* 3.-	 Ejecutar (md-links <path-to-file> [options])
+* 4.-	$ md-links ./some/example.md Ejecuta el programa y entrega el archivo a revisar
+* 5.-	Se imprime en consola la ruta y los links encontrados.
 
 Por parte del programa
 
 ***Programa debe estar disponible para ser instalado a través de npm install
 (Configurar package.json, repo público)***
 1) pásame una ruta
+
 2)Ruta/ archivo: es válido? 
+
 Si: se continúa  / No: lanzar error: “Archivo/ Ruta no válidos”
-3.- Ruta:  Absoluta  ||  Relativa
+3) Ruta:  Absoluta  ||  Relativa
 4.- Buscar archivo md válido para leer / si no lo encuentra, lanzar error: “No se ha encontrado archivo formato .md, verificar formato”
 5.- Analizar archivo md y encontrar links.
 6.- Retornar una promesa que resuelva un arreglo de objetos:
