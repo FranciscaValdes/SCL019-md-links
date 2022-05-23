@@ -73,11 +73,13 @@ Por parte del programa
 * 1.- pásame una ruta
 * 2.-Ruta/ archivo: es válido? 
 Si: se continúa  / No: lanzar error: “Archivo/ Ruta no válidos”
-* 3) Ruta:  Absoluta  ||  Relativa
+* 3.- Ruta:  Absoluta  ||  Relativa
 * 4.- Buscar archivo md válido para leer / si no lo encuentra, lanzar error: “No se ha encontrado archivo formato .md, verificar formato”
 * 5.- Analizar archivo md y encontrar links.
 * 6.- Retornar una promesa que resuelva un arreglo de objetos:
+
 -Cada objeto representa un link y contiene las sgtes. Propiedades: 
+
 * Con validate:false :
 
 •	href: URL encontrada.
